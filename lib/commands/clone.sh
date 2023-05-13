@@ -38,6 +38,26 @@ clone() {
   return "$EX_SUCCESS"
 }
 
+run_post_clone_cmd() {
+  local cloned_castles=()
+  while [[ $# -gt 0 ]]; do
+    local git_repo=$1
+    if is_github_shorthand "$git_repo"; then
+      git_repo="https://github.com/$git_repo.git"
+    fi
+    local castle
+    castle=$(repo_basename "$git_repo")
+    shift
+    local repo="$repos/$castle"
+    if [[ ! -f $repo/bootstrap/post_clone.sh ]]; then
+      continue;
+    else
+	  "$repo/bootstrap/post_clone.sh"
+    fi
+  done
+  return "$EX_SUCCESS"
+}
+
 symlink_cloned_files() {
   local cloned_castles=()
   while [[ $# -gt 0 ]]; do

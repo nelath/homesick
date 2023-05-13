@@ -1,6 +1,6 @@
 # homesick
 
-This repo is a clone of https://github.com/andsens/homesick that has been simplified to
+This repo is a clone of https://github.com/andsens/homesHick that has been simplified to
 support only zsh and bash and has been renamed to homesick again and extended to support
 bootstrapping scripts as part of the first install.
 
@@ -439,96 +439,4 @@ and create a symlink in its place like so:
 When running `homesick link dotfiles`, homesick will now not traverse into the `.emacs` folder
 in your castle. Instead it will create a symlink named `.emacs` in your `$HOME`,
 which links to `$HOME/.homesick/repos/dotfiles/home/.emacs`.
-
-## Files outside your home directory ##
-
-Although homesick is specifically made for files in your `$HOME` directory,
-you can get homesick to venture outside those borders.
-Since homesick follows directory symlinks in `$HOME`, you can create one
-that points to a different location on your machine.
-
-*Please note that managing files outside `$HOME` is beyond homesick's intended scope.
-It is possible, but more often than not it is not the right tool for the job.
-The strategy outlined below is more of a "hack" than a real pattern.*
-
-Consider a scenario where you might have a webapp you want to add to `/var/www/tools`.
-This is the structure of that app:
-
-    tools/
-    ├─public/
-    │ ├─assets/
-    │ │ ├─js/
-    │ │ │ └─jquery.js
-    │ │ └─css/
-    │ │   └─bootstrap.css
-    │ └─index.htm
-    └─app/
-      └─controllers/
-        └─router.py
-
-You will need to place a symlink somewhere inside your `$HOME` that points at the intended
-location for your webapp. We don't want to clutter `$HOME`, so we place the symlink in the
-`.homesick` directory.
-
-    $HOME/
-    └─.homesick/
-      ├─repos/
-      │ └─...
-      └─links/
-        └─tools ➞ /var/www/tools
-
-The structure of the castle now needs to mimick the location of that symlink:
-
-    webapp/
-    └─home/
-      └─.homesick/
-        └─links/
-          └─tools/
-            ├─public/
-            │ ├─assets/
-            │ │ └─...
-            │ └─index.htm
-            └─app/
-              └─...
-
-When running `homesick link webapp`, homesick will now traverse
-into the directory structure of your castle, discover that the *resource* `.homesick/links/tools`
-already exists, choose the `identical` action (see the [linking table](Symlinking#linking-table)),
-follow the symlink you created, and go on with creating the `public/` and `app/` folders
-in `/var/www/tools`.
-
-This method can of course be combined with the [shallow symlinking](Symlinking#shallow-symlinking) method.
-In such a case it would be better to point the symlink in the `.homesick/links` directory at `/var/www` (to avoid having to create symlinks for both `public/` and `app/`)
-and use the following castle directory structure
-
-    webapp/
-    ├─tools/
-    │ ├─public/
-    │ │ ├─assets/
-    │ │ │ └─...
-    │ │ └─index.htm
-    │ └─app/
-    │   └─...
-    └─home/
-      └─.homesick/
-        └─links/
-          └─var-www/
-            └─tools ➞ ../../../../tools
-
-If you want the `links/` folder to be under version control, you should place it adjacent to a castles `home/` folder like this
-
-    webapp/
-    ├─tools/
-    │ └─...
-    ├─home/
-    │ └─.homesick/
-    │   └─repos/
-    │     └─webapp/
-    │       └─links/
-    │         └─var-www/
-    │           └─tools ➞ ../../../../../../tools
-    └─links/
-      └─var-www/ ➞ /var/www
-
-This scenario is of course only useful if the destination of your webapp is the same on all the machines homesick is deployed to. Deployment specific links (like `/srv` instead of `/var/www` on some installations) are only possible if you keep the symlinks outside of version control.
 

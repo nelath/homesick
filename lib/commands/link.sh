@@ -126,3 +126,22 @@ get_repo_files() {
     # This somehow messes quite badly with string substitution.
   ) | sort -zu # sort the results and make the list unique (-u), NUL is the line separator (-z)
 }
+
+run_post_link_cmd() {
+  while [[ $# -gt 0 ]]; do
+    local git_repo=$1
+    if is_github_shorthand "$git_repo"; then
+      git_repo="https://github.com/$git_repo.git"
+    fi
+    local castle
+    castle=$(repo_basename "$git_repo")
+    shift
+    local repo="$repos/$castle"
+    if [[ ! -f $repo/bootstrap/post_link.sh ]]; then
+      continue;
+    else
+	  "$repo/bootstrap/post_link.sh"
+    fi
+  done
+  return "$EX_SUCCESS"
+}

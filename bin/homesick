@@ -198,7 +198,10 @@ case $cmd in
     done
     case $cmd in
       clone)
+		run_post_clone_cmd "${params[@]}"
         symlink_cloned_files "${params[@]}" ;;
+      link)
+		run_post_link_cmd "${params[@]}" ;;
       refresh)
         pull_outdated $threshhold "${params[@]}" ;;
       pull)
