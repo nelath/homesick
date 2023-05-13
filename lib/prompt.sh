@@ -12,7 +12,7 @@ ask_symlink() {
     fi
     if prompt_no 'updates' "$msg" 'symlink?'; then
       # shellcheck source=commands/link.sh disable=SC2154
-      source "$homeshick/lib/commands/link.sh"
+      source "$homesick/lib/commands/link.sh"
       for castle in "$@"; do
         symlink "$castle"
       done
@@ -24,7 +24,7 @@ ask_symlink() {
 
 # Singleline prompt that stays on the same line even if you press enter.
 # Automatically colors the line according to the answer the user gives.
-# Currently homeshick only has prompts with "no" as the default,
+# Currently homesick only has prompts with "no" as the default,
 # so there's no reason to implement prompt_yes right now
 prompt_no() {
   local OTALK=$TALK

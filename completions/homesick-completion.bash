@@ -2,11 +2,11 @@
 #
 ###############################################################################
 #
-# Bash completion for homeshick (https://github.com/andsens/homeshick).
+# Bash completion for homesick (https://github.com/andsens/homesick).
 #
 # To use, add this line (or equivalent) to your .bashrc:
 #
-#   source ~/.homesick/repos/homeshick/completions/homeshick-completion.bash
+#   source ~/.homesick/repos/homesick/completions/homesick-completion.bash
 #
 ###############################################################################
 #
@@ -32,30 +32,30 @@
 #
 ###############################################################################
 
-_homeshick_basename()
+_homesick_basename()
 {
     echo "${1##*/}"
 }
 
-_homeshick_castles()
+_homesick_castles()
 {
     local repos="$HOME/.homesick/repos"
     # This should be a while loop like in link.sh, leave it for now though
     # shellcheck disable=SC2044
     for repo in $(find -L "$repos" -mindepth 2 -maxdepth 2 -type d -name .git); do
-        _homeshick_basename "${repo%/.git}"
+        _homesick_basename "${repo%/.git}"
     done
 }
 
-_homeshick_complete_castles()
+_homesick_complete_castles()
 {
-    COMPREPLY=($(compgen -W "$(_homeshick_castles)" -- "$1"))
+    COMPREPLY=($(compgen -W "$(_homesick_castles)" -- "$1"))
 }
 
-_homeshick_complete()
+_homesick_complete()
 {
     # The comments at the bottom of the file explain what's going on here.
-    if $_HOMESHICK_HAS_COMPOPT; then
+    if $_HOMESICK_HAS_COMPOPT; then
         compopt +o default +o nospace
         COMPREPLY=()
     else
@@ -81,7 +81,7 @@ _homeshick_complete()
     local -r long_opts='--quiet --skip --force --batch --verbose'
     local -r protocols='file ftp ftps git http https rsync ssh'
 
-    # Scan through the command line and find the homeshick command
+    # Scan through the command line and find the homesick command
     # (if present), as well as its expected position.
     local cmd
     local cmd_index=1 # Expected index of the command token.
@@ -122,12 +122,12 @@ _homeshick_complete()
         case "$cmd" in
             check | pull | link | symlink | updates)
                 # Offer one or more castle name completions.
-                _homeshick_complete_castles "$cur"
+                _homesick_complete_castles "$cur"
                 ;;
             cd)
                 # Offer exactly one castle name completion.
                 if (( COMP_CWORD == cmd_index + 1 )); then
-                    _homeshick_complete_castles "$cur"
+                    _homesick_complete_castles "$cur"
                 fi
                 ;;
             refresh)
@@ -137,16 +137,16 @@ _homeshick_complete()
                 if (( COMP_CWORD == cmd_index + 1 )); then
                     COMPREPLY=({0..9})
                 else
-                    _homeshick_complete_castles "$cur"
+                    _homesick_complete_castles "$cur"
                 fi
                 ;;
             track)
                 # Offer one castle name completion, then filename completions
                 # after that.
                 if (( COMP_CWORD == cmd_index + 1 )); then
-                    _homeshick_complete_castles "$cur"
+                    _homesick_complete_castles "$cur"
                 else
-                    $_HOMESHICK_HAS_COMPOPT && compopt -o default
+                    $_HOMESICK_HAS_COMPOPT && compopt -o default
                     # Let the default Readline filename completion take over.
                     COMPREPLY=()
                 fi
@@ -154,7 +154,7 @@ _homeshick_complete()
             clone)
                 # Offer an initial protocol completion.
                 if (( COMP_CWORD == cmd_index + 1 )); then
-                    $_HOMESHICK_HAS_COMPOPT && compopt -o nospace
+                    $_HOMESICK_HAS_COMPOPT && compopt -o nospace
                     COMPREPLY=($(compgen -W "$protocols" -S '://' -- "$cur"))
                 fi
                 ;;
@@ -195,8 +195,8 @@ _homeshick_complete()
 # space characters to the command line, rather than generating filenames.
 #
 if type compopt &>/dev/null; then
-    _HOMESHICK_HAS_COMPOPT=true
+    _HOMESICK_HAS_COMPOPT=true
 else
-    _HOMESHICK_HAS_COMPOPT=false
+    _HOMESICK_HAS_COMPOPT=false
 fi
-complete -o default -F _homeshick_complete homeshick
+complete -o default -F _homesick_complete homesick

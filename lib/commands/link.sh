@@ -80,7 +80,7 @@ symlink() {
 
 # Fetches all files and folders in a repository that are tracked by git
 # Works recursively on submodules as well
-# Disable SC2154, we cannot do it inline where $homeshick is used.
+# Disable SC2154, we cannot do it inline where $homesick is used.
 # shellcheck disable=SC2154
 get_repo_files() {
   # Resolve symbolic links
@@ -120,7 +120,7 @@ get_repo_files() {
     done < <(cd "$root" &&
              git ls-files 'home/' &&
              git submodule --quiet foreach --recursive \
-             "$homeshick/lib/submodule_files.sh \"$root\" \"\$toplevel\" \"\$path\"")
+             "$homesick/lib/submodule_files.sh \"$root\" \"\$toplevel\" \"\$path\"")
     # Unfortunately we have to use an external script for `git submodule foreach'
     # because versions prior to ~ 2.0 use `eval' to execute the argument.
     # This somehow messes quite badly with string substitution.

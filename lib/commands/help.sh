@@ -10,19 +10,19 @@ help() {
 
 printf "homes\e[1;34mh\e[0mick uses git in concert with symlinks to track your precious dotfiles.
 
- Usage: homeshick [options] TASK
+ Usage: homesick [options] TASK
 
  Tasks:
-  homeshick cd CASTLE                 # Enter a castle
-  homeshick clone URI..               # Clone URI as a castle for homeshick
-  homeshick generate CASTLE..         # Generate a castle repo
-  homeshick list                      # List cloned castles
-  homeshick check [CASTLE..]          # Check a castle for updates
-  homeshick refresh [DAYS [CASTLE..]] # Check if a castle needs refreshing
-  homeshick pull [CASTLE..]           # Update a castle
-  homeshick link [CASTLE..]           # Symlinks all dotfiles from a castle
-  homeshick track CASTLE FILE..       # Add a file to a castle
-  homeshick help [TASK]               # Show usage of a task
+  homesick cd CASTLE                 # Enter a castle
+  homesick clone URI..               # Clone URI as a castle for homesick
+  homesick generate CASTLE..         # Generate a castle repo
+  homesick list                      # List cloned castles
+  homesick check [CASTLE..]          # Check a castle for updates
+  homesick refresh [DAYS [CASTLE..]] # Check if a castle needs refreshing
+  homesick pull [CASTLE..]           # Update a castle
+  homesick link [CASTLE..]           # Symlinks all dotfiles from a castle
+  homesick track CASTLE FILE..       # Add a file to a castle
+  homesick help [TASK]               # Show usage of a task
 
  Aliases:
   ls      # Alias to list
@@ -47,46 +47,46 @@ extended_help() {
   case $1 in
     cd)
       printf "Enters a castle's home directory.\n"
-      printf "NOTE: For this to work, homeshick must be invoked via homeshick.{sh,csh,fish}.\n\n"
-      printf "Usage:\n  homeshick cd CASTLE"
+      printf "NOTE: For this to work, homesick must be invoked via homesick.{sh,csh,fish}.\n\n"
+      printf "Usage:\n  homesick cd CASTLE"
       ;;
     clone)
-      printf "Clones URI as a castle for homeshick\n"
-      printf "Usage:\n  homeshick clone URL.."
+      printf "Clones URI as a castle for homesick\n"
+      printf "Usage:\n  homesick clone URL.."
       ;;
     generate)
-      printf "Generates a repo prepped for usage with homeshick\n"
-      printf "Usage:\n  homeshick generate CASTLE.."
+      printf "Generates a repo prepped for usage with homesick\n"
+      printf "Usage:\n  homesick generate CASTLE.."
       ;;
     list|ls)
       printf "Lists cloned castles\n"
-      printf "Usage:\n  homeshick %s" "$1"
+      printf "Usage:\n  homesick %s" "$1"
       ;;
     check|updates)
       printf "Checks if a castle has been updated on the remote\n"
-      printf "Usage:\n  homeshick %s [CASTLE..]" "$1"
+      printf "Usage:\n  homesick %s [CASTLE..]" "$1"
       ;;
     refresh)
       printf "Checks if a castle has not been pulled in DAYS days.\n"
       printf "The default is one week.\n"
-      printf "Usage:\n  homeshick refresh [DAYS] [CASTLE..]"
+      printf "Usage:\n  homesick refresh [DAYS] [CASTLE..]"
       ;;
     pull)
       printf "Updates a castle. Also recurse into submodules.\n"
-      printf "Usage:\n  homeshick pull [CASTLE..]"
+      printf "Usage:\n  homesick pull [CASTLE..]"
       ;;
     link|symlink)
       printf "Symlinks all dotfiles from a castle\n"
-      printf "Usage:\n  homeshick %s [CASTLE..]" "$1"
+      printf "Usage:\n  homesick %s [CASTLE..]" "$1"
       ;;
     track)
       printf "Adds a file to a castle.\n"
       printf "This moves the file into the castle and creates a symlink in its place.\n"
-      printf "Usage:\n  homeshick track CASTLE FILE.."
+      printf "Usage:\n  homesick track CASTLE FILE.."
       ;;
     help)
       printf "Shows usage of a task\n"
-      printf "Usage:\n  homeshick help [TASK]"
+      printf "Usage:\n  homesick help [TASK]"
       ;;
     *)
       # no args for help

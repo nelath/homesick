@@ -7,7 +7,7 @@ clone() {
   if is_github_shorthand "$git_repo"; then
     if [[ -e "$git_repo/.git" ]]; then
       local msg="$git_repo also exists as a filesystem path,"
-      msg="${msg} use \`homeshick clone ./$git_repo' to circumvent the github shorthand"
+      msg="${msg} use \`homesick clone ./$git_repo' to circumvent the github shorthand"
       warn 'clone' "$msg"
     fi
     git_repo="https://github.com/$git_repo.git"
