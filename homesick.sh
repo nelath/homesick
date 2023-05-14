@@ -13,9 +13,10 @@ homesick() {
 		else
 			prefix=
 		fi
-		cd "$HOME/.homesick/repos/${prefix}$2"
+		# shellcheck disable=2164
+		cd "${HOME}/.homesick/repos/${prefix}$2"
 	else
-		"${HOMESICK_DIR:-$HOME/.homesick/repos/homesick}/bin/homesick" "$@"
+		"${HOMESICK_DIR:-${HOME}/.homesick/repos/homesick}/bin/homesick" "$@"
 	fi
 }
 alias hs=homesick
