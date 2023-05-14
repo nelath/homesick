@@ -52,7 +52,7 @@ run_post_clone_cmd() {
     if [[ ! -f $repo/bootstrap/post_clone.sh ]]; then
       continue;
     else
-	  "$repo/bootstrap/post_clone.sh"
+      "$repo/bootstrap/post_clone.sh"
     fi
   done
   return "$EX_SUCCESS"
