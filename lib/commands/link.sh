@@ -138,10 +138,10 @@ run_post_link_cmd() {
     castle=$(repo_basename "$git_repo")
     shift
     local repo="$repos/$castle"
-    if [[ ! -f $repo/bootstrap/post_link.sh ]]; then
+    if [[ ! -f $repo/bootstrap/post-link.sh ]]; then
       continue;
     else
-      "$repo/bootstrap/post_link.sh"
+      "$repo/bootstrap/post-link.sh"
     fi
   done
   return "$EX_SUCCESS"

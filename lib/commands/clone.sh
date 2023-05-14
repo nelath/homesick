@@ -49,10 +49,12 @@ run_post_clone_cmd() {
     castle=$(repo_basename "$git_repo")
     shift
     local repo="$repos/$castle"
-    if [[ ! -f $repo/bootstrap/post_clone.sh ]]; then
+    if [[ ! -f $repo/bootstrap/post-clone.sh ]]; then
+      echo "no bootstrap found"
       continue;
     else
-      "$repo/bootstrap/post_clone.sh"
+      echo "starting bootstrap"
+      "$repo/bootstrap/post-clone.sh"
     fi
   done
   return "$EX_SUCCESS"
