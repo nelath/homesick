@@ -2,4 +2,5 @@
 
 # Go location
 GOPATH=$(readlink -f "${HOME}/software")/go
-export GOPATH
+GOROOT=${GOPATH}
+export GOPATH GOROOT
