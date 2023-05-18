@@ -205,8 +205,8 @@ case $cmd in
       refresh)
         pull_outdated "$threshhold" "${params[@]}" ;;
       pull)
-        symlink_new_files "${params[@]}"
-		run_post_pull_cmd "${params[@]}" ;;
+		run_post_pull_cmd "${params[@]}"
+        symlink_new_files "${params[@]}" ;;
     esac
     result=$?
     if [[ $exit_status == 0 && $result != 0 ]]; then
