@@ -128,7 +128,6 @@ get_repo_files() {
 }
 
 run_post_link_cmd() {
-  local cloned_castles=()
   while [[ $# -gt 0 ]]; do
     local git_repo=$1
     if is_github_shorthand "$git_repo"; then

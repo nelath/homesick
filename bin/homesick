@@ -203,9 +203,10 @@ case $cmd in
       link)
 		run_post_link_cmd "${params[@]}" ;;
       refresh)
-        pull_outdated $threshhold "${params[@]}" ;;
+        pull_outdated "$threshhold" "${params[@]}" ;;
       pull)
-        symlink_new_files "${params[@]}" ;;
+        symlink_new_files "${params[@]}"
+		run_post_pull_cmd "${params[@]}" ;;
     esac
     result=$?
     if [[ $exit_status == 0 && $result != 0 ]]; then
