@@ -15,7 +15,7 @@ or a multitude of emacs or vim plugins alongside your own customizations without
 
 homesick is installed to your own home directory and does not require root privileges to be installed.
 ```sh
-git clone https://github.com/michaelrommel/homesick.git $HOME/.homesick/repos/homesick
+git clone https://github.com/nelath/homesick.git $HOME/.homesick/repos/homesick
 ```
 
 To invoke homesick, source the `homesick.sh` script from your rc-script:
